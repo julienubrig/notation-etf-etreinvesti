@@ -57,14 +57,14 @@ def get_etf_static_from_justetf(isin):
 
     soup = BeautifulSoup(r.text, "html.parser")
 
-    # 1) Récupérer le nom de l'ETF
+    # 1) Récupérer le nom
     nom_brut = soup.find("h1", {"data-testid":"etf-profile-header_etf-name"})
     if nom_brut:
         nom = nom_brut.get_text(strip=True)
     else:
         nom = None
 
-    # 2) Récupérer l'année de lancement de l'ETF
+    # 2) Récupérer l'année de lancement
     complete_launch_date_brut = soup.find("div", {"data-testid":"etf-profile-header_inception-date-value"})
     if complete_launch_date_brut:
         launch_date_brut = complete_launch_date_brut.get_text(strip=True)
@@ -72,21 +72,21 @@ def get_etf_static_from_justetf(isin):
     else:
         launch_date = None
 
-    # 3) Récupérer le type de réplication de l'ETF
+    # 3) Récupérer le type de réplication
     replication_type_brut = soup.find("div", {"data-testid":"etf-profile-header_replication-value"})
     if replication_type_brut:
         replication_type = replication_type_brut.get_text(strip=True)
     else:
         replication_type = None
 
-    # 4) Récupérer la politique de dividendes de l'ETF
+    # 4) Récupérer la politique de dividendes
     pol_dividendes_brut = soup.find("div", {"data-testid":"etf-profile-header_distribution-policy-value"})
     if pol_dividendes_brut:
         pol_dividendes = pol_dividendes_brut.get_text(strip=True)
     else:
         pol_dividendes = None
 
-    # 5) Récupérer l'éligibilité au PEA de l'ETF
+    # 5) Récupérer l'éligibilité au PEA
     elig_PEA_brut = soup.find("span", {"data-testid":"etf-profile-controls_pea-label-text"})
     if elig_PEA_brut:
         elig_PEA = elig_PEA_brut.get_text(strip=True)
