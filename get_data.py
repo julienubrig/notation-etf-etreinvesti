@@ -44,7 +44,7 @@ def get_cap_from_justetf(isin: str):
 
 
 def get_etf_static_from_justetf(isin):
-    time.sleep(1 + random.uniform(0.2, 0.8))
+    time.sleep(1 + random.uniform(0.4, 0.8))
 
     url = f"https://www.justetf.com/fr/etf-profile.html?isin={isin}"
     headers = {
@@ -377,7 +377,7 @@ def get_hist_perf(isin):
 
 
 def get_euronext_from_justetf(isin: str):
-    time.sleep(1 + random.uniform(0.2, 0.8))
+    time.sleep(1.5 + random.uniform(0.2, 0.8))
 
     url = f"https://www.justetf.com/fr/etf-profile.html?isin={isin}"
     headers = {
