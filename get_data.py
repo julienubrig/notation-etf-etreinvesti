@@ -13,7 +13,7 @@ from update_db import (update_etf_market_data, check_isin_etf_static)
 def get_price_from_yfinance(ticker: str):
 
     t = yf.Ticker(ticker)
-    prix_part = t.history(period="1d")["Close"].iloc[-1]
+    prix_part = t.history(period="5d")["Close"].iloc[-1]
     prix_part = float(prix_part)
     if prix_part is None:
         raise ValueError(f"⛔ Impossible de récupérer le prix pour {ticker}")

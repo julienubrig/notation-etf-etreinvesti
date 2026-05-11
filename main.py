@@ -6,7 +6,7 @@ import pandas as pd
 
 
 base_dir = Path(__file__).resolve().parent
-etf_list_path = base_dir / "etf_list6.xlsx"
+etf_list_path = base_dir / "etf_list23.xlsx"
 df = pd.read_excel(etf_list_path)
 NB_LINES_XLS_FILE = len(df)
 

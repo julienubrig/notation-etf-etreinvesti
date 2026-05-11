@@ -3,3 +3,4 @@
 
 # Données locales
 *.xlsx
+*.pyc
