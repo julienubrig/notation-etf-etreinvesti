@@ -347,7 +347,8 @@ def get_hist_perf(isin):
 
     r = requests.get(url, headers=headers)
     if r.status_code != 200:
-        raise ValueError(f"⛔ Impossible de charger la page ExtraETF pour {isin}")
+        print(f"⛔ Impossible de charger la page ExtraETF pour {isin}")
+        return None
     
     pos = r.text.find("Depuis l'édition")
     if pos == -1:
