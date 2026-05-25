@@ -16,7 +16,8 @@ def get_price_from_yfinance(ticker: str):
     prix_part = t.history(period="5d")["Close"].iloc[-1]
     prix_part = float(prix_part)
     if prix_part is None:
-        raise ValueError(f"⛔ Impossible de récupérer le prix pour {ticker}")
+        print(f"⛔ Impossible de récupérer le prix pour {ticker}")
+        return None
 
     return prix_part
 
@@ -29,7 +30,8 @@ def get_cap_from_justetf(isin: str):
 
     r = requests.get(url, headers=headers)
     if r.status_code != 200:
-        raise ValueError(f"⛔ Impossible de charger la page JustETF pour {isin}")
+        print(f"⛔ Impossible de charger la page JustETF pour {isin}")
+        return None
 
     soup = BeautifulSoup(r.text, "html.parser")
     
@@ -320,7 +322,8 @@ def get_tracking_diff(isin):
 
     r = requests.get(url, headers=headers)
     if r.status_code != 200 or not page_exists_on_trackingdifferences(isin):
-        return
+        print(f"⛔ Impossible de récupérer la Tracking Difference pour {isin}")
+        return None
 
     # Trouver le texte "avg. TD" ou "durschschn. TD"
     match = re.search(r"name\s*:\s*'(avg\. TD|durchschn\. TD)'\s*,\s*data\s*:\s*\[([0-9\.,\-]+)\]", r.text, re.DOTALL)
@@ -347,7 +350,7 @@ def get_hist_perf(isin):
 
     r = requests.get(url, headers=headers)
     if r.status_code != 200:
-        print(f"⛔ Impossible de charger la page ExtraETF pour {isin}")
+        print(f"⛔ Impossible de récupérer la parformance historique pour {isin}")
         return None
     
     pos = r.text.find("Depuis l'édition")
@@ -387,7 +390,8 @@ def get_euronext_from_justetf(isin: str):
 
     r = requests.get(url, headers=headers)
     if r.status_code != 200:
-        raise ValueError(f"⛔ Impossible de charger la page JustETF pour {isin}")
+        print(f"⛔ Impossible de savoir si l'ETF {isin} est coté sur Euronext")
+        return None
 
     soup = BeautifulSoup(r.text, "html.parser")
     html_txt = soup.get_text().lower()
@@ -405,7 +409,8 @@ def get_ter_from_justetf(isin):
 
     r = requests.get(url, headers=headers)
     if r.status_code != 200:
-        raise ValueError(f"⛔ Impossible de charger la page JustETF pour {isin}")
+        print(f"⛔ Impossible de récupérer les frais de gestion pour l'ETF {isin}")
+        return None
 
     soup = BeautifulSoup(r.text, "html.parser")
 
