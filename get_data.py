@@ -16,7 +16,7 @@ def get_price_from_yfinance(ticker: str):
     prix_part = t.history(period="5d")["Close"].iloc[-1]
     prix_part = float(prix_part)
     if prix_part is None:
-        print(f"⛔ Impossible de récupérer le prix pour {ticker}")
+        print(f"⛔ Impossible de récupérer le prix pour l'ETF {ticker}")
         return None
 
     return prix_part
@@ -30,7 +30,7 @@ def get_cap_from_justetf(isin: str):
 
     r = requests.get(url, headers=headers)
     if r.status_code != 200:
-        print(f"⛔ Impossible de charger la page JustETF pour {isin}")
+        print(f"⛔ Impossible de récupérer la capitalisation de l'ETF {isin}")
         return None
 
     soup = BeautifulSoup(r.text, "html.parser")
