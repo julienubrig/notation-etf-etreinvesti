@@ -12,7 +12,42 @@ NB_LINES_XLS_FILE = len(df)
 
 début = datetime.now()
 
+# Choix de la méthode de traitement
+while True:
+    choix_methode_str = input("""
+    Voulez-vous :
+    1 -> Choisir l'ETF à partir duquel commencer
+    2 -> Traiter toute la liste des ETF
+
+    Votre choix : """)
+
+    if choix_methode_str in ["1", "2"]:
+        break
+    else:
+        print("❗Veuillez entrer 1 ou 2❗")
+
+choix_methode_int = int(choix_methode_str)
+
+# Si méthode 1, choix de l'ETF de départ
+if choix_methode_int == 1:
+    while True:
+        try:
+            starting_point = int(input("Entrez le numéro du premier ETF à traiter (de 1 à {NB_LINES_XLS_FILE}) : "))
+            if 1 <= starting_point <= NB_LINES_XLS_FILE:
+                start_index = starting_point - 1
+                break
+            else:
+                print(f"❗Veuillez entrer un nombre entre 1 et {NB_LINES_XLS_FILE}❗")
+        except:
+            print("❗Veuillez entrer un nombre valide❗")
+else:
+    start_index = 0
+
 for index, row in df.iterrows():
+
+    if index < start_index:
+        continue
+
     isin_str = str(row["ISIN"])
     ticker_str = str(row["Ticker"])
 
